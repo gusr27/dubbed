@@ -1,24 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
+import {Button,Grid,AppBar, Toolbar, Typography, InputBase} from '@material-ui/core/';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    /*
+      Fix and color app bar, and background color.
+
+      Get showcase container ready.
+    */
+    <Grid container>
+      <Grid item xs={3} style={{backgroundColor:"#023e8a"}}>
+        <Typography variant="h6" style={{color:"#caf0f8"}}>
+          Dubbed Anime Search Engine
+        </Typography>
+      </Grid>
+      <Grid item xs={6}>  <AppBar style={{backgroundColor:"#0077b6"}} position="static">
+          <Toolbar>
+          <InputBase
+          placeholder="Search..."
+          />
+
+          </Toolbar>
+        </AppBar></Grid>
+      <Grid item xs={3} style={{backgroundColor:"#023e8a"}}></Grid>
+    </Grid>
+
+
+
   );
 }
 
