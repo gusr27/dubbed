@@ -1,7 +1,11 @@
 .App {
   text-align: center;
-}
 
+  height: 100%;
+}
+body{
+
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -34,5 +38,20 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+#default-display{
+  display: ;
+}
+@media only screen and (min-width:768px) {
+
+  #showcase2{
+    display:none;
+  }
+}
+@media only screen and (max-width:767px) {
+
+  #showcase{
+    display:none;
   }
 }
