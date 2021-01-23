@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import logo from './logo.svg';
 import './App.css';
-import {Button,Grid,AppBar, Toolbar, Typography, InputBase,GridList, Card, CardContent} from '@material-ui/core/';
+import {Button,Grid,AppBar, Toolbar, Typography, InputBase,GridList, Card, CardContent,CardMedia} from '@material-ui/core/';
 import shows from './shows.js'
 class App extends Component {
   constructor(){
@@ -40,10 +40,18 @@ class App extends Component {
 
        let items = shows.filter(show => show.title.toLowerCase().includes(this.state.title)).map((result, i) =>
 
-            <Card key={i}>
-              <Typography>
-              {result.title}
-              </Typography>
+            <Card key={i} className="root">
+          
+              <div className="details">
+                <CardContent className="content">
+                <Typography component="h5" variant="h5">
+                {result.title}
+                </Typography>
+                <Typography>
+                  {result.service}
+                </Typography>
+                </CardContent>
+              </div>
             </Card>
 
       )
@@ -53,6 +61,7 @@ class App extends Component {
 
 
   }
+
   renderShowcase = () =>{
 
       return(
@@ -64,6 +73,8 @@ class App extends Component {
               <Typography>
                 Attack on Titan
               </Typography>
+              <CardMedia
+                src={"https://cdn.myanimelist.net/images/anime/10/47347.jpg"}/>
             </CardContent>
           </Card>
           <Card>
@@ -81,7 +92,11 @@ class App extends Component {
              <Typography>
                Attack on Titan
              </Typography>
-           </CardContent>
+             <CardMedia
+              image="./attack.jpg"
+               />
+               </CardContent>
+
          </Card>
          <Card>
            <CardContent>

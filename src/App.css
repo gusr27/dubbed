@@ -31,7 +31,16 @@ body{
 .App-link {
   color: #61dafb;
 }
-
+.content{
+  flex: '1 0 auto';
+}
+.root{
+  display: 'flex';
+}
+.details{
+  display: 'flex';
+  flex-direction: 'column';
+}
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
