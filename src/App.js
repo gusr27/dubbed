@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import logo from './logo.svg';
+
 import './App.css';
-import {Button,Grid,AppBar, Toolbar, Typography, InputBase,GridList, Card, CardContent,CardMedia} from '@material-ui/core/';
-import shows from './shows.js'
+import {Grid,AppBar, Toolbar, Typography, InputBase,GridList, Card, CardContent,CardMedia} from '@material-ui/core/';
+import firebase from './firebase.js'
+
 class App extends Component {
   constructor(){
     super();
@@ -30,18 +31,36 @@ class App extends Component {
         showcase:false
       })
     }
+
   }
   changeTitle(){
     return (this.state.title)
+  }
+  componentDidMount(){
+    const shows = firebase.database().ref('shows')
+    shows.on("value", (snapshot)=>{
+      let items = snapshot.val()
+      let newState=[]
+      for (let item in items){
+        newState.push({
+          title: items[item].title
+        })
+      }
+      this.setState({
+        results: newState
+      })
+
+    })
+    console.log(this.state.results)
   }
   searchDb = () => {
 
     if(this.state.title.length > 1){
 
-       let items = shows.filter(show => show.title.toLowerCase().includes(this.state.title)).map((result, i) =>
+       let items = this.state.results.filter(show => show.title.toLowerCase().includes(this.state.title)).map((result, i) =>
 
             <Card key={i} className="root">
-          
+
               <div className="details">
                 <CardContent className="content">
                 <Typography component="h5" variant="h5">
@@ -65,48 +84,65 @@ class App extends Component {
   renderShowcase = () =>{
 
       return(
-          <Grid item xs={6} justify="center" alignItems="center" >
+          <div>
          <GridList id="showcase2"cellheight={160} cols={1}>
 
-          <Card>
-            <CardContent>
-              <Typography>
-                Attack on Titan
-              </Typography>
-              <CardMedia
-                src={"https://cdn.myanimelist.net/images/anime/10/47347.jpg"}/>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent>
-              <Typography>
-                Attack on Titan
-              </Typography>
-            </CardContent>
-          </Card>
+         <Card className="root">
+
+           <div className="details">
+             <CardContent className="content">
+             <Typography component="h5" variant="h5">
+             Attck on Titan
+             </Typography>
+             <Typography>
+               Funimation
+             </Typography>
+             </CardContent>
+           </div>
+         </Card>
+         <Card className="root">
+
+           <div className="details">
+             <CardContent className="content">
+             <Typography component="h5" variant="h5">
+             Attck on Titan
+             </Typography>
+             <Typography>
+               Funimation
+             </Typography>
+             </CardContent>
+           </div>
+         </Card>
         </GridList>
         <GridList id="showcase"cellheight={160} cols={2}>
+        <Card className="root">
 
-         <Card>
-           <CardContent>
-             <Typography>
-               Attack on Titan
-             </Typography>
-             <CardMedia
-              image="./attack.jpg"
-               />
-               </CardContent>
+          <div className="details">
+            <CardContent className="content">
+            <Typography component="h5" variant="h5">
+            Attck on Titan
+            </Typography>
+            <Typography>
+              Funimation
+            </Typography>
+            </CardContent>
+          </div>
+        </Card>
+        <Card className="root">
 
-         </Card>
-         <Card>
-           <CardContent>
-             <Typography>
-               Attack on Titan
-             </Typography>
-           </CardContent>
-         </Card>
+          <div className="details">
+            <CardContent className="content">
+            <Typography component="h5" variant="h5">
+            Attck on Titan
+            </Typography>
+            <Typography>
+              Funimation
+            </Typography>
+            </CardContent>
+          </div>
+        </Card>
        </GridList>
-        </Grid>
+        </div>
       )
 
 
@@ -138,7 +174,7 @@ class App extends Component {
         </AppBar></Grid>
       <Grid item xs={0} sm={6}></Grid>
     </Grid >
-      <Grid id="default-display" container justify="center" alignItems="center" style={{paddingTop:"100px"}} direction="column">
+      <Grid id="default-display" container  alignItems="center" style={{paddingTop:"100px"}} direction="column">
 
         <Grid item xs={6} justify="center" alignItems="center" >
           {this.state.showcase ? this.renderShowcase(): null}

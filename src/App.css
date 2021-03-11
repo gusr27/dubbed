@@ -4,7 +4,10 @@
   min-height: 100%;
 }
 body{
-
+ background-color: rgba(0, 0, 0, 0.87);
+}
+#default-display {
+  min-height: 100vh;
 }
 .App-logo {
   height: 40vmin;
